@@ -1,4 +1,4 @@
-﻿namespace Mash.Application.Application.Commands;
+﻿namespace Mash.Application.Commands;
 
 public interface ICommand
 {

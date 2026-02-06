@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
-using Mash.Application.Application.Commands;
 using Mash.Application.Commands;
 using Mash.Infrastructure;
 
@@ -8,7 +7,6 @@ namespace Mash.CommandLine;
 
 internal static partial class Program
 {
-    
     private static string[] _input = [];
     private static readonly Logger Logger = new();
     

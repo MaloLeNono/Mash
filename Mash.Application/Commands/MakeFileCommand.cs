@@ -1,6 +1,4 @@
-﻿using Mash.Application.Application.Commands;
-
-namespace Mash.Application.Commands;
+﻿namespace Mash.Application.Commands;
 
 public class MakeFileCommand(CommandContext ctx, ILogger logger) : ICommand
 {

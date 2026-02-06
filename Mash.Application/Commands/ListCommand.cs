@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Mash.Application.Application.Commands;
 
 namespace Mash.Application.Commands;
 
@@ -10,10 +9,10 @@ public class ListCommand(CommandContext ctx, ILogger logger) : ICommand
     
     public void Execute(string[] input)
     {
-        string[] directories = Directory.GetDirectories(ctx.WorkingDirectory);
+        string[] files = Directory.GetFileSystemEntries(ctx.WorkingDirectory);
         StringBuilder responseBuilder = new();
         Console.ForegroundColor = ConsoleColor.Yellow;
-        foreach (string directory in directories)
+        foreach (string directory in files)
         {
             responseBuilder.Append(Path.GetFileName(directory));
             responseBuilder.Append('\n');
