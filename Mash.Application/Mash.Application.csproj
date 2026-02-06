@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Include="obj\Debug\net10.0\Mash.Application.csproj.CoreCompileInputs.cache" />
+      <Content Include="obj\Debug\net10.0\Mash.Application.csproj.FileListAbsolute.txt" />
+      <Content Include="obj\Debug\net10.0\Mash.Application.dll" />
+      <Content Include="obj\Debug\net10.0\Mash.Application.pdb" />
+      <Content Include="obj\Debug\net10.0\Mash.Application.sourcelink.json" />
+      <Content Include="obj\rider.project.model.nuget.info" />
+    </ItemGroup>
+
 </Project>

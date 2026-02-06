@@ -1,0 +1,39 @@
+﻿{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Mash.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Mash.Application": "1.0.0"
+        },
+        "runtime": {
+          "Mash.Infrastructure.dll": {}
+        }
+      },
+      "Mash.Application/1.0.0": {
+        "runtime": {
+          "Mash.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Mash.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Mash.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

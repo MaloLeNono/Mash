@@ -10,4 +10,15 @@
       <ProjectReference Include="..\Mash.Application\Mash.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="obj\Debug\net10.0\Mash.Inf.7497DB1A.Up2Date" />
+      <Content Include="obj\Debug\net10.0\Mash.Infrastructure.csproj.AssemblyReference.cache" />
+      <Content Include="obj\Debug\net10.0\Mash.Infrastructure.csproj.CoreCompileInputs.cache" />
+      <Content Include="obj\Debug\net10.0\Mash.Infrastructure.csproj.FileListAbsolute.txt" />
+      <Content Include="obj\Debug\net10.0\Mash.Infrastructure.dll" />
+      <Content Include="obj\Debug\net10.0\Mash.Infrastructure.pdb" />
+      <Content Include="obj\Debug\net10.0\Mash.Infrastructure.sourcelink.json" />
+      <Content Include="obj\rider.project.model.nuget.info" />
+    </ItemGroup>
+
 </Project>

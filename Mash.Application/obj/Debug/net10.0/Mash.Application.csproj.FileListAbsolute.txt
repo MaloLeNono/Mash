@@ -1,0 +1,12 @@
+﻿C:\Users\malog\RiderProjects\Mash\Mash.Application\bin\Debug\net10.0\Mash.Application.deps.json
+C:\Users\malog\RiderProjects\Mash\Mash.Application\bin\Debug\net10.0\Mash.Application.dll
+C:\Users\malog\RiderProjects\Mash\Mash.Application\bin\Debug\net10.0\Mash.Application.pdb
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.AssemblyInfoInputs.cache
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.AssemblyInfo.cs
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.csproj.CoreCompileInputs.cache
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.sourcelink.json
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.dll
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\refint\Mash.Application.dll
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\Mash.Application.pdb
+C:\Users\malog\RiderProjects\Mash\Mash.Application\obj\Debug\net10.0\ref\Mash.Application.dll
