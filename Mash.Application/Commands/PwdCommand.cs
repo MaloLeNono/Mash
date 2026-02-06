@@ -1,6 +1,8 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Application.Commands;
 
-public class PwdCommand(CommandContext ctx) : ICommand
+namespace Mash.Application.Commands;
+
+public class PwdCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "pwd";
     public int MinParameterCount => 0;

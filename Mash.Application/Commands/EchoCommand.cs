@@ -1,6 +1,8 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Application.Commands;
 
-public class EchoCommand(CommandContext ctx) : ICommand
+namespace Mash.Application.Commands;
+
+public class EchoCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "echo";
     public int MinParameterCount => 1;
@@ -9,7 +11,7 @@ public class EchoCommand(CommandContext ctx) : ICommand
     {
         if (input.Length > 2)
         {
-            Logger.PrintError("'echo' has 1 parameter.");
+            logger.PrintError("'echo' has 1 parameter.");
             return;
         }
         

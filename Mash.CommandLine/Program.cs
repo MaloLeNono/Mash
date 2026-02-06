@@ -1,28 +1,30 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
-using Mash.Application;
+using Mash.Application.Application.Commands;
 using Mash.Application.Commands;
+using Mash.Infrastructure;
 
-namespace Mash;
+namespace Mash.CommandLine;
 
 internal static partial class Program
 {
-    private static CommandContext? _ctx;
+    
+    private static string[] _input = [];
+    private static readonly Logger Logger = new();
     
     private static void Main()
     {
         string userRootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        string[] input;
-
+        
         List<ICommand> commands = [];
-        _ctx = new CommandContext(userRootDirectory, userRootDirectory, commands);
+        CommandContext ctx = new CommandContext(userRootDirectory, userRootDirectory, commands);
 
-        _ctx.RegisteredCommands.AddRange(
-            Assembly.GetExecutingAssembly()
+        ctx.RegisteredCommands.AddRange(
+            Assembly.GetAssembly(typeof(ICommand))!
                 .GetTypes()
                 .Where(type => typeof(ICommand).IsAssignableFrom(type))
-                .Where(type => type.IsClass || type.IsValueType)
-                .Select(type => (ICommand)Activator.CreateInstance(type, _ctx)!)
+                .Where(type => type is { IsClass: true, IsAbstract: false })
+                .Select(type => (ICommand)Activator.CreateInstance(type, ctx, Logger)!)
         );
         
         Console.WriteLine("""
@@ -32,27 +34,27 @@ internal static partial class Program
                           
                           """);
         
-        bool running = true;
-        
-        while (running)
-        {
-            input = GetInput();
+        Run(ctx);
+    }
 
-            if (input.Length == 0) continue;
+    private static void Run(CommandContext ctx)
+    {
+        while (true)
+        {
+            _input = GetInput();
+
+            if (_input.Length == 0) continue;
             
-            if (input[0] == "exit" && input.Length == 1)
-                running = false;
-            
-            ICommand? command = _ctx.RegisteredCommands.FirstOrDefault(c => c.Name == input[0]);
+            ICommand? command = ctx.RegisteredCommands.FirstOrDefault(c => c.Name == _input[0]);
 
             if (command is null)
             {
-                Logger.PrintError($"Unrecognized Command \"{input[0]}\". Type 'help' for a list of available commands");
+                Logger.PrintError($"Unrecognized Command \"{_input[0]}\". Type 'help' for a list of available commands");
                 continue;
             }
             
-            if (input.Length - 1 >= command.MinParameterCount)
-                command.Execute(input);
+            if (_input.Length - 1 >= command.MinParameterCount)
+                command.Execute(_input);
             else
                 Logger.PrintError($"Command \"{command.Name}\" needs at least {command.MinParameterCount} parameters.");
         }
@@ -60,10 +62,6 @@ internal static partial class Program
 
     private static string[] GetInput()
     {
-        if (_ctx is null) return [];
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write($"{_ctx.WorkingDirectory} ");
-        Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write("~ ");
         Console.ResetColor();

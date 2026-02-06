@@ -1,6 +1,8 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Application.Commands;
 
-public class MakeDirCommand(CommandContext ctx) : ICommand
+namespace Mash.Application.Commands;
+
+public class MakeDirCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "mkdir";
     public int MinParameterCount => 1;
@@ -9,7 +11,7 @@ public class MakeDirCommand(CommandContext ctx) : ICommand
     {
         if (input.Length > 2)
         {
-            Logger.PrintError("'mkdir' only has 1 argument");
+            logger.PrintError("'mkdir' only has 1 argument");
             return;
         }
         
@@ -21,7 +23,7 @@ public class MakeDirCommand(CommandContext ctx) : ICommand
         }
         catch (Exception e)
         {
-            Logger.PrintError(e.Message);
+            logger.PrintError(e.Message);
         }
     }
 

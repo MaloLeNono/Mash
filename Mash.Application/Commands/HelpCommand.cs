@@ -1,6 +1,8 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Application.Commands;
 
-public class HelpCommand(CommandContext ctx) : ICommand
+namespace Mash.Application.Commands;
+
+public class HelpCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "help";
     public int MinParameterCount => 0;
@@ -9,7 +11,7 @@ public class HelpCommand(CommandContext ctx) : ICommand
     {
         if (input.Length > 1)
         {
-            Logger.PrintError("'help' has no parameters");
+            logger.PrintError("'help' has no parameters");
             return;
         }
         

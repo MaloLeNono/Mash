@@ -1,8 +1,9 @@
 ﻿using System.Text;
+using Mash.Application.Application.Commands;
 
 namespace Mash.Application.Commands;
 
-public class ListCommand(CommandContext ctx) : ICommand
+public class ListCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "ls";
     public int MinParameterCount => 0;

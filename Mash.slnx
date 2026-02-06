@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="Mash/Mash.csproj" />
+  <Project Path="Mash.Application/Mash.Application.csproj" />
+  <Project Path="Mash.CommandLine/Mash.CommandLine.csproj" />
+  <Project Path="Mash.Infrastructure/Mash.Infrastructure.csproj" />
 </Solution>

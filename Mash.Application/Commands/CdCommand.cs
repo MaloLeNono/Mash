@@ -1,6 +1,8 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Application.Commands;
 
-public class CdCommand(CommandContext ctx) : ICommand
+namespace Mash.Application.Commands;
+
+public class CdCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "cd";
     public int MinParameterCount => 0;
@@ -9,7 +11,7 @@ public class CdCommand(CommandContext ctx) : ICommand
     {
         if (input.Length > 2)
         {
-            Logger.PrintError("'cd' command only takes 1 argument");
+            logger.PrintError("'cd' command only takes 1 argument");
             return;
         }
 
@@ -27,7 +29,7 @@ public class CdCommand(CommandContext ctx) : ICommand
 
             if (parentDirectory is null)
             {
-                Logger.PrintError("There is no higher directory");
+                logger.PrintError("There is no higher directory");
                 return;
             }
 
@@ -40,7 +42,7 @@ public class CdCommand(CommandContext ctx) : ICommand
 
         if (!Directory.Exists(directory) || directory.EndsWith('.'))
         {
-            Logger.PrintError($"Directory {directory} does not exist");
+            logger.PrintError($"Directory {directory} does not exist");
             return;
         }
 

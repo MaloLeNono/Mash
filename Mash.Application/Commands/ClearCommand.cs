@@ -1,6 +1,8 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Application.Commands;
 
-public class ClearCommand(CommandContext ctx) : ICommand
+namespace Mash.Application.Commands;
+
+public class ClearCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "clear";
     public int MinParameterCount => 0;
