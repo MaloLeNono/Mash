@@ -1,18 +1,16 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Data;
+using Mash.Application.Interface;
+
+namespace Mash.Application.Commands;
 
 public class CdCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "cd";
     public int MinParameterCount => 0;
+    public int MaxParameterCount => 1;
 
     public void Execute(string[] input)
     {
-        if (input.Length > 2)
-        {
-            logger.PrintError("'cd' command only takes 1 argument");
-            return;
-        }
-
         if (input.Length == 1)
         {
             ctx.WorkingDirectory = ctx.UserRootDirectory;

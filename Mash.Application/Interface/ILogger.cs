@@ -1,4 +1,4 @@
-﻿namespace Mash.Application;
+﻿namespace Mash.Application.Interface;
 
 public interface ILogger
 {

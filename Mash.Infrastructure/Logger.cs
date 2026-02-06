@@ -1,4 +1,4 @@
-﻿using Mash.Application;
+﻿using Mash.Application.Interface;
 
 namespace Mash.Infrastructure;
 

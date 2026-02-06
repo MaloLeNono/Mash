@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
-using Mash.Application.Commands;
+using Mash.Application.Data;
+using Mash.Application.Interface;
 using Mash.Infrastructure;
 
 namespace Mash.CommandLine;
@@ -14,47 +15,53 @@ internal static partial class Program
     {
         string userRootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         
-        List<ICommand> commands = [];
+        Dictionary<string, ICommand> commands = [];
         CommandContext ctx = new CommandContext(userRootDirectory, userRootDirectory, commands);
 
-        ctx.RegisteredCommands.AddRange(
-            Assembly.GetAssembly(typeof(ICommand))!
-                .GetTypes()
-                .Where(type => typeof(ICommand).IsAssignableFrom(type))
-                .Where(type => type is { IsClass: true, IsAbstract: false })
-                .Select(type => (ICommand)Activator.CreateInstance(type, ctx, Logger)!)
-        );
+        RegisterCommands(ctx);
         
         Console.WriteLine("""
                           Mash (Malo Shell) v0.0.1
                           
-                          Type 'help' for help (duh)
+                          Type "help" for help (duh)
                           
                           """);
         
         Run(ctx);
     }
 
+    private static void RegisterCommands(CommandContext ctx)
+    {
+        IEnumerable<ICommand> commands = Assembly.GetAssembly(typeof(ICommand))!.GetTypes()
+            .Where(type => typeof(ICommand).IsAssignableFrom(type))
+            .Where(type => type is { IsClass: true, IsAbstract: false })
+            .Select(type => (ICommand)Activator.CreateInstance(type, ctx, Logger)!);
+        
+        foreach (ICommand command in commands) 
+            ctx.RegisteredCommands.Add(command.Name, command);
+    }
+    
     private static void Run(CommandContext ctx)
     {
-        while (true)
+        while (!ctx.ShouldExit)
         {
             _input = GetInput();
 
             if (_input.Length == 0) continue;
-            
-            ICommand? command = ctx.RegisteredCommands.FirstOrDefault(c => c.Name == _input[0]);
+
+            string commandName = _input[0];
+            ctx.RegisteredCommands.TryGetValue(commandName, out ICommand? command);
 
             if (command is null)
             {
-                Logger.PrintError($"Unrecognized Command \"{_input[0]}\". Type 'help' for a list of available commands");
+                Logger.PrintError($"Unrecognized Command \"{commandName}\". Type 'help' for a list of available commands");
                 continue;
             }
             
-            if (_input.Length - 1 >= command.MinParameterCount)
+            if (_input.Length - 1 >= command.MinParameterCount && _input.Length -1 <= command.MaxParameterCount)
                 command.Execute(_input);
             else
-                Logger.PrintError($"Command \"{command.Name}\" needs at least {command.MinParameterCount} parameters.");
+                Logger.PrintError($"Command \"{command.Name}\" needs at least {command.MinParameterCount} parameters and has a maximum amount of {command.MaxParameterCount} parameters.");
         }
     }
 

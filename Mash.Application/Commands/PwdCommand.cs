@@ -1,10 +1,14 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Data;
+using Mash.Application.Interface;
+
+namespace Mash.Application.Commands;
 
 public class PwdCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "pwd";
     public int MinParameterCount => 0;
-    
+    public int MaxParameterCount => 0;
+
     public void Execute(string[] input)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Mash.Application.Data;
+using Mash.Application.Interface;
 
 namespace Mash.Application.Commands;
 
@@ -6,18 +7,20 @@ public class ListCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "ls";
     public int MinParameterCount => 0;
-    
+    public int MaxParameterCount => 0;
+
     public void Execute(string[] input)
     {
         string[] files = Directory.GetFileSystemEntries(ctx.WorkingDirectory);
-        StringBuilder responseBuilder = new();
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        foreach (string directory in files)
+        foreach (string file in files)
         {
-            responseBuilder.Append(Path.GetFileName(directory));
-            responseBuilder.Append('\n');
+            if (File.Exists(file))
+                Console.ForegroundColor = ConsoleColor.Blue;
+            else if (Directory.Exists(file))
+                Console.ForegroundColor = ConsoleColor.Yellow;
+            
+            Console.WriteLine(Path.GetFileName(file));
         }
-        Console.WriteLine(responseBuilder.ToString());
         Console.ResetColor();
     }
 

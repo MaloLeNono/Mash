@@ -1,18 +1,16 @@
-﻿namespace Mash.Application.Commands;
+﻿using Mash.Application.Data;
+using Mash.Application.Interface;
+
+namespace Mash.Application.Commands;
 
 public class MakeDirCommand(CommandContext ctx, ILogger logger) : ICommand
 {
     public string Name => "mkdir";
     public int MinParameterCount => 1;
-    
+    public int MaxParameterCount => 1;
+
     public void Execute(string[] input)
     {
-        if (input.Length > 2)
-        {
-            logger.PrintError("'mkdir' only has 1 argument");
-            return;
-        }
-        
         string newDirectoryName = input[1];
         string fullNewDirectory = Path.Combine(ctx.WorkingDirectory, newDirectoryName);
         try
